@@ -28,7 +28,7 @@
 </template>
 
 <script>
-	import {delay} from '../../utils/utils.js'
+	import {delay, keepScreen} from '../../utils/utils.js'
 	import CircleButton from '../../components/CircleButton.vue'
 	// 进度条一个周期的时间
 	const COUNT_TIME = 20000
@@ -37,8 +37,6 @@
 			return {
 				play: false,
 				finish: false,
-				best: 0,
-				timer: null,
 				timeSec: 0,
 				startTime: 0,
 				percent: 0
@@ -49,11 +47,11 @@
 				return this.play ? 'icon-stop' : 'icon-play'
 			}
 		},
-		onShow() {
-			const best = uni.getStorageSync('best')
-			if(best) {
-				this.best = best
-			}
+		mounted() {
+			keepScreen(true)
+		},
+		beforeDestroy() {
+			keepScreen(false)
 		},
 		methods: {
 			// 切换计时模式
@@ -70,10 +68,12 @@
 				if(this.play) {
 					this.finish = true
 					this.play = false
+					keepScreen(false)
 				} else {
 					this.play = true
 					this.finish = false
 					this.startTime = Date.now()
+					keepScreen(true)
 					this.startCount()
 				}
 			},

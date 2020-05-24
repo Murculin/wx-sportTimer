@@ -179,8 +179,6 @@ var COUNT_TIME = 20000;var _default =
     return {
       play: false,
       finish: false,
-      best: 0,
-      timer: null,
       timeSec: 0,
       startTime: 0,
       percent: 0 };
@@ -191,11 +189,11 @@ var COUNT_TIME = 20000;var _default =
       return this.play ? 'icon-stop' : 'icon-play';
     } },
 
-  onShow: function onShow() {
-    var best = uni.getStorageSync('best');
-    if (best) {
-      this.best = best;
-    }
+  mounted: function mounted() {
+    (0, _utils.keepScreen)(true);
+  },
+  beforeDestroy: function beforeDestroy() {
+    (0, _utils.keepScreen)(false);
   },
   methods: {
     // 切换计时模式
@@ -212,10 +210,12 @@ var COUNT_TIME = 20000;var _default =
       if (this.play) {
         this.finish = true;
         this.play = false;
+        (0, _utils.keepScreen)(false);
       } else {
         this.play = true;
         this.finish = false;
         this.startTime = Date.now();
+        (0, _utils.keepScreen)(true);
         this.startCount();
       }
     },

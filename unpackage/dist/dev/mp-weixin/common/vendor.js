@@ -9568,7 +9568,7 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.throttle = throttle;exports.setAudio = exports.delay = void 0; // 延迟执行
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.keepScreen = keepScreen;exports.throttle = throttle;exports.setAudio = exports.delay = void 0; // 延迟执行
 var delay = function delay(ms) {
   return new Promise(function (resolve) {
     setTimeout(function () {
@@ -9583,9 +9583,15 @@ exports.delay = delay;var setAudio = function setAudio(name) {
   audio.play();
   audio.onEnded(audio.destroy);
 };
+// 保持屏幕亮起
+exports.setAudio = setAudio;function keepScreen(flag) {
+  uni.setKeepScreenOn({
+    keepScreenOn: flag });
+
+}
 
 // 节流
-exports.setAudio = setAudio;function throttle(fn, wait) {
+function throttle(fn, wait) {
   var pre = Date.now();
   return function () {
     var context = this;

@@ -56,7 +56,7 @@
 
 <script>
 	import CircleButton from '../../components/CircleButton.vue'
-	import {delay, setAudio, throttle} from '../../utils/utils.js'
+	import {delay, setAudio, keepScreen} from '../../utils/utils.js'
 	const STATUS = {
 	  prepare: 'prepare',
 	  work: 'work',
@@ -120,7 +120,11 @@
 		},
 		mounted() {
 			this.startTime = Date.now()
+			keepScreen(true)
 			this.startCount()
+		},
+		beforeDestroy() {
+			keepScreen(false)
 		},
 		methods: {
 			async startCount() {
@@ -185,10 +189,12 @@
 			// 切换暂停开始
 			togglePlay() {
 				if(!this.pauseTime) {
+					keepScreen(false)
 					this.pauseTime = Date.now()
 				} else {
 					this.startTime += (Date.now() - this.pauseTime)
 					this.pauseTime = null
+					keepScreen(true)
 					this.startCount()
 				}
 			},

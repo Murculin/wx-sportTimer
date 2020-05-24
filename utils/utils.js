@@ -13,6 +13,12 @@ export const setAudio = (name) => {
 	audio.play()
 	audio.onEnded(audio.destroy)
 }
+// 保持屏幕亮起
+export function keepScreen(flag) {
+	uni.setKeepScreenOn({
+		keepScreenOn: flag
+	})
+}
 
 // 节流
 export function throttle(fn, wait){

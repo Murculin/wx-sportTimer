@@ -268,7 +268,11 @@ var STATUS = {
   },
   mounted: function mounted() {
     this.startTime = Date.now();
+    (0, _utils.keepScreen)(true);
     this.startCount();
+  },
+  beforeDestroy: function beforeDestroy() {
+    (0, _utils.keepScreen)(false);
   },
   methods: {
     startCount: function startCount() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
@@ -333,10 +337,12 @@ var STATUS = {
     // 切换暂停开始
     togglePlay: function togglePlay() {
       if (!this.pauseTime) {
+        (0, _utils.keepScreen)(false);
         this.pauseTime = Date.now();
       } else {
         this.startTime += Date.now() - this.pauseTime;
         this.pauseTime = null;
+        (0, _utils.keepScreen)(true);
         this.startCount();
       }
     },
