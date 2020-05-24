@@ -36,7 +36,6 @@
 </template>
 
 <script>
-	import Card from '../../components/Card/Card.vue'
 	import CircleButton from '../../components/CircleButton.vue'
 	import MPicker from '../../components/MPicker.vue'
 	export default {
@@ -115,7 +114,6 @@
 			}
 		},
 		components:{
-			Card,
 			CircleButton,
 			MPicker
 		}

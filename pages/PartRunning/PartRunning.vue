@@ -56,7 +56,7 @@
 
 <script>
 	import CircleButton from '../../components/CircleButton.vue'
-	import {delay, setAudio, keepScreen} from '../../utils/utils.js'
+	import {setAudio, keepScreen} from '../../utils/utils.js'
 	const STATUS = {
 	  prepare: 'prepare',
 	  work: 'work',
@@ -80,7 +80,9 @@
 				// 暂停时间
 				pauseTime: null,
 				// 是否完成计时
-				finish: false
+				finish: false,
+				// 计时器
+				timer: null
 			}
 		},
 		computed: {
@@ -128,10 +130,12 @@
 		},
 		methods: {
 			async startCount() {
-				if(this.pauseTime || this.finish) return
-				await delay(15)
-				this.updateCount()
-				this.startCount()
+				this.timer = setInterval(() => {
+					if(this.pauseTime || this.finish) {
+						clearInterval(this.timer)
+					}
+					this.updateCount()
+				}, 30)
 			},
 			updateCount() {
 				const {workTime, restTime, count, totalTime, countTime} = this.timeInfo
@@ -176,7 +180,6 @@
 							setAudio('success.mp3')
 							return	
 					} else {
-						console.log('rest')
 						this.status = STATUS.rest
 						this.workTimeSec = 0
 						const restTimeMs = restTime * 1000 - (countMs - workTime * 1000)
@@ -184,7 +187,6 @@
 						this.percent = 100 - (restTimeMs / (restTime * 1000)) * 100
 					}
 				}
-				
 			},
 			// 切换暂停开始
 			togglePlay() {

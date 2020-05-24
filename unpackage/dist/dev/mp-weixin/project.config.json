@@ -10,6 +10,8 @@
 	"libVersion": "2.9.2",
 	"appid": "wx6466c4ae74f397d1",
 	"projectname": "SportsTimer",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -19,28 +21,13 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "计时",
-					"pathName": "pages/PartRunning/PartRunning",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

@@ -54,7 +54,6 @@
 				}, 1000)
 			},
 			handleChange(e) {
-				console.log(e)
 				this.$emit('change', e.target.value)
 			}
 		}

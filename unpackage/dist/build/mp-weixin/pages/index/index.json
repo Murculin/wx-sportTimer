@@ -1,7 +1,7 @@
 {
-  "navigationBarTitleText": "uni-ui基础项目",
+  "navigationBarTitleText": "SportsTimer",
+  "disableScroll": true,
   "usingComponents": {
-    "card": "/components/Card/Card",
     "circle-button": "/components/CircleButton",
     "m-picker": "/components/MPicker"
   }

@@ -9,5 +9,6 @@
     "navigationBarTextStyle": "white",
     "navigationStyle": "custom"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap89.json"
 }

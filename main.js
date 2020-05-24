@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App'
-import store from './store'
 import './styles/iconfont.css'
 
 Vue.config.productionTip = false
@@ -18,7 +17,6 @@ Vue.filter('formatTime', (data) => {
 	return `${min}:${sec}`
 })
 const app = new Vue({
-	...App,
-	store
+	...App
 })
 app.$mount()

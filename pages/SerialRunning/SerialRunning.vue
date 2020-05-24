@@ -28,7 +28,7 @@
 </template>
 
 <script>
-	import {delay, keepScreen} from '../../utils/utils.js'
+	import {keepScreen} from '../../utils/utils.js'
 	import CircleButton from '../../components/CircleButton.vue'
 	// 进度条一个周期的时间
 	const COUNT_TIME = 20000
@@ -39,7 +39,8 @@
 				finish: false,
 				timeSec: 0,
 				startTime: 0,
-				percent: 0
+				percent: 0,
+				timer: null
 			};
 		},
 		computed: {
@@ -79,10 +80,12 @@
 			},
 			// 开始计时
 			async startCount() {
-				if(this.finish || !this.play) return
-				await delay(15)
-				this.updateCount()
-				this.startCount()
+				this.timer = setInterval(() => {
+					if(this.finish || !this.play) {
+						clearInterval(this.timer)
+					}
+					this.updateCount()
+				}, 30)
 			},
 			updateCount() {
 				const disMs = Date.now() - this.startTime
