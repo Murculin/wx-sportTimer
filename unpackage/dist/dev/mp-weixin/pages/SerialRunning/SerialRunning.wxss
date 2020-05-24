@@ -42,6 +42,15 @@
   -webkit-align-items: center;
           align-items: center;
 }
+.serial .progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
+}
 .serial .top_btn {
   position: absolute;
   width: 200rpx;
@@ -62,8 +71,28 @@
           justify-content: center;
 }
 .serial .record {
+  position: absolute;
+  top: 180rpx;
   font-size: 60rpx;
-  margin-top: 150rpx;
+  width: 100vw;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.serial .record .finish_title {
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  opacity: 1;
+}
+.serial .record .finish_title.hide {
+  opacity: 0;
 }
 .serial .time {
   font-family: BebasNeue-Regular;
@@ -71,6 +100,10 @@
   text-align: center;
   line-height: 0.75;
   font-size: 200rpx;
-  margin-top: 300rpx;
+  margin-top: 550rpx;
+}
+.serial .btn_wrap {
+  position: absolute;
+  bottom: 200rpx;
 }
 

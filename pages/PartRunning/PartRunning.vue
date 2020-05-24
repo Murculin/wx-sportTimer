@@ -155,9 +155,6 @@
 					// 当前count经过时间
 					const countSec = startSec % countTime
 					const countMs = startMs % (countTime * 1000)
-					if(countSec===0) {
-						// 前一count结束
-					}
 					if(countSec < workTime) {
 						// 运动阶段
 						this.restTimeSec = 0

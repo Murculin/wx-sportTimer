@@ -1,35 +1,99 @@
 <template>
 	<view class="serial">
-		<view class="top_btn" @click="toggleMode">
-			间隔计时
+		<!-- 进度条 -->
+		<view 
+			class="progress"
+			:style="{background:`linear-gradient(to bottom, rgba(0, 0, 0, 0) ${percent}%, rgba(255, 255, 255, 0.1) ${percent}%)`}"
+		>	
+		</view>
+		<view
+			v-if="!play"
+			class="top_btn"
+			@click="toggleMode"
+		>
+			<text>间隔计时</text>
 		</view>
 		<view class="record">
-			最好成绩: 00:00
+			<text class="finish_title" :class="{hide:!finish}">本次的成绩为</text>
 		</view>
-		<view class="time">00:00</view>
+		<view class="time">{{timeSec | formatTime}}</view>
 		<view class="btn_wrap">
 			<CircleButton
 				class="btn_play"
-				iconClass="icon-play"
+				:iconClass="toggleIcon"
+				@click="togglePlay"
 			></CircleButton>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {delay} from '../../utils/utils.js'
 	import CircleButton from '../../components/CircleButton.vue'
+	// 进度条一个周期的时间
+	const COUNT_TIME = 20000
 	export default {
 		data() {
 			return {
-				
+				play: false,
+				finish: false,
+				best: 0,
+				timer: null,
+				timeSec: 0,
+				startTime: 0,
+				percent: 0
 			};
+		},
+		computed: {
+			toggleIcon() {
+				return this.play ? 'icon-stop' : 'icon-play'
+			}
+		},
+		onShow() {
+			const best = uni.getStorageSync('best')
+			if(best) {
+				this.best = best
+			}
 		},
 		methods: {
 			// 切换计时模式
 			toggleMode() {
+				if(this.playing) {
+					return
+				}
 				uni.redirectTo({
 				  url: '../index/index'
 				})
+			},
+			// 开始/停止按钮
+			togglePlay() {
+				if(this.play) {
+					this.finish = true
+					this.play = false
+				} else {
+					this.play = true
+					this.finish = false
+					this.startTime = Date.now()
+					this.startCount()
+				}
+			},
+			// 开始计时
+			async startCount() {
+				if(this.finish || !this.play) return
+				await delay(15)
+				this.updateCount()
+				this.startCount()
+			},
+			updateCount() {
+				const disMs = Date.now() - this.startTime
+				const disSec = Math.floor(disMs / 1000)
+				this.timeSec = disSec
+				const countMs = disMs % COUNT_TIME
+				if(countMs < COUNT_TIME/2) {
+					this.percent = (countMs / (COUNT_TIME/2)) * 100
+				} else {
+					this.percent = 100 - ((countMs - (COUNT_TIME/2)) / (COUNT_TIME/2)) * 100
+				}
 			}
 		},
 		components: {
@@ -47,6 +111,14 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	.progress {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		transition-timing-function: linear;
+	}
 	.top_btn {
 		position: absolute;
 		width: 200rpx;
@@ -60,8 +132,20 @@
 		justify-content: center;
 	}
 	.record {
+		position: absolute;
+		top: 180rpx;
 		font-size: 60rpx;
-		margin-top: 150rpx;
+		width: 100vw;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.finish_title {
+			transition: all 0.4s;
+			opacity: 1;
+			&.hide {
+				opacity: 0;
+			}
+		}
 	}
 	.time {
 		font-family: BebasNeue-Regular;
@@ -69,7 +153,11 @@
 		text-align: center;
 		line-height: 0.75;
 		font-size: 200rpx;
-		margin-top: 300rpx;
+		margin-top: 550rpx;
+	}
+	.btn_wrap {
+		position: absolute;
+		bottom: 200rpx;
 	}
 }
 </style>
