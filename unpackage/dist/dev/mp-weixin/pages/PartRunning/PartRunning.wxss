@@ -43,6 +43,9 @@
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
 }
 .part_running .content .progress {
   position: absolute;
@@ -59,7 +62,6 @@
   font-size: 30px;
   font-family: BebasNeue-Regular;
   font-weight: lighter;
-  margin-top: 280rpx;
 }
 .part_running .content .time {
   -webkit-transition: all 0.5s;

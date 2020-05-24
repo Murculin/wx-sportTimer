@@ -27,6 +27,8 @@
 				@change="restTimeChange"
 				:value="restTime | formatTime"
 			></MPicker>
+		</view>
+		<view class="bottomBox">
 			<text class="total_time">共{{totalTime | formatTime}}</text>
 			<CircleButton :disable="disable" @click="handleClickStart"></CircleButton>
 		</view>
@@ -72,6 +74,7 @@
 		methods: {
 			// 点击开始跳转到计时页面
 			handleClickStart() {
+				this.saveTimeInfo()
 				uni.redirectTo({
 				  url: '../PartRunning/PartRunning'
 				})
@@ -86,7 +89,6 @@
 			countChange(val) { 
 				this.count = parseInt(val) + 1
 				this.saveTimeInfo()
-				console.log(this.count)
 			},
 			// 运动时间改变
 			workTimeChange(val) {
@@ -94,7 +96,6 @@
 				const sec = parseInt(val[1])
 				this.workTime = min * 60 + sec
 				this.saveTimeInfo()
-				console.log(this.workTime)
 			},
 			// 休息时间改变
 			restTimeChange(val) {
@@ -102,7 +103,6 @@
 				const sec = parseInt(val[1])
 				this.restTime = min * 60 + sec
 				this.saveTimeInfo()
-				console.log(this.restTime)
 			},
 			saveTimeInfo() {
 				const that = this
@@ -125,12 +125,15 @@
 <style lang="scss">
 	.index {
 		position: relative;
+		display: flex;
+		height: 100%;
+		width: 100%;
 		.top_btn {
 			position: absolute;
 			width: 200rpx;
 			height: 70rpx;
 			border-radius: 70rpx;
-			top: 50rpx;
+			top: 5vh;
 			left: 40rpx;
 			background-color: rgba(0,0,0,0.15);
 			display: flex;
@@ -138,18 +141,15 @@
 			justify-content: center;
 		}
 		.content {
-			margin-top: 150rpx;
-			padding: 0 40rpx;
+			flex: 1;
+			padding: 10vh 40rpx 0;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			.index_card {
-				margin-bottom: 50rpx;
+				flex: 1;
 				width: 100%;
-			}
-			.total_time {
-				margin-bottom: 50rpx;
-				font-size: 32rpx;
+				margin: 24rpx 40rpx;
 			}
 		}
 		.title {
@@ -162,6 +162,17 @@
 			font-family: BebasNeue-Regular;
 			font-weight: lighter;
 			margin-top: 15rpx;
+		}
+		.bottomBox {
+			padding-bottom: 40rpx;
+			margin-top: 20rpx;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			.total_time {
+				margin-bottom: 20rpx;
+				font-size: 32rpx;
+			}
 		}
 	}
 </style>

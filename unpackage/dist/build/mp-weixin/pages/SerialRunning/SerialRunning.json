@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "circle-button": "/components/CircleButton"
+  }
+}

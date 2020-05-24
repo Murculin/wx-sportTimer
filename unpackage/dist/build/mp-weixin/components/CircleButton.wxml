@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['handleClick',['$event']]]]]}}" class="{{['circle_button',(disable)?'disable':'']}}" bindtap="__e"><view class="{{['iconfont _i',iconClass]}}"></view></view>

@@ -111,6 +111,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	.progress {
 		position: absolute;
 		left: 0;
@@ -124,7 +125,7 @@
 		width: 200rpx;
 		height: 70rpx;
 		border-radius: 70rpx;
-		top: 50rpx;
+		top: 5vh;
 		left: 40rpx;
 		background-color: rgba(0,0,0,0.15);
 		display: flex;
@@ -153,7 +154,6 @@
 		text-align: center;
 		line-height: 0.75;
 		font-size: 200rpx;
-		margin-top: 550rpx;
 	}
 	.btn_wrap {
 		position: absolute;

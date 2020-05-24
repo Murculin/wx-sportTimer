@@ -258,7 +258,9 @@ var STATUS = {
     } },
 
   onShow: function onShow() {
-    this.timeInfo = uni.getStorageSync('timeInfo');
+    var timeInfo = uni.getStorageSync('timeInfo');
+    if (!timeInfo) return;
+    this.timeInfo = timeInfo;
     this.workTimeSec = this.timeInfo.workTime;
     this.restTimeSec = this.timeInfo.restTime;
     this.timeInfo.totalTime = this.timeInfo.workTime * this.timeInfo.count + this.timeInfo.restTime * (this.timeInfo.count - 1);

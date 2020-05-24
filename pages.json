@@ -3,17 +3,23 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-ui基础项目"
+				"navigationBarTitleText": "SportsTimer",
+				"disableScroll": true
 			}
 		},
 		{
-			"path":"pages/PartRunning/PartRunning"
-		}
-       ,{
-            "path" : "pages/SerialRunning/SerialRunning",
-            "style" : {}
-        }
-    ],
+			"path":"pages/PartRunning/PartRunning",
+			"style" : {
+				"disableScroll": true
+			}
+		},
+		{
+			"path" : "pages/SerialRunning/SerialRunning",
+			"style" : {
+				"disableScroll": true
+			}
+    }
+  ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationStyle": "custom"

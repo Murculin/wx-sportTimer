@@ -129,7 +129,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-//
 var _default2 =
 {
   props: {
@@ -140,10 +139,6 @@ var _default2 =
     time: {
       type: String,
       default: '00:00' },
-
-    height: {
-      type: Number,
-      default: 240 },
 
     rangeArr: {
       type: Array,

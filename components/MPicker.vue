@@ -1,7 +1,6 @@
 <template>
 	<picker
 		class="card"
-		:style="{'height': `${height}rpx`}"
 		:range="rangeArr"
 		:value="value"
 		@change="handleChange"
@@ -24,10 +23,6 @@
 			time: {
 				type: String,
 				default: '00:00'
-			},
-			height: {
-				type: Number,
-				default: 240
 			},
 			rangeArr: {
 				type: Array,
@@ -72,6 +67,7 @@
 		flex-direction: column;
 		position: relative;
 		width: 100%;
+		height: 100%;
 		.content_box {
 			position: absolute;
 			top: 0;

@@ -8,8 +8,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.2",
-	"appid": "touristappid",
-	"projectname": "wx-timer",
+	"appid": "wx6466c4ae74f397d1",
+	"projectname": "SportsTimer",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -36,8 +36,8 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "连续计时",
-					"pathName": "pages/SerialRunning/SerialRunning",
+					"name": "计时",
+					"pathName": "pages/PartRunning/PartRunning",
 					"scene": null
 				}
 			]

@@ -193,6 +193,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 {
   data: function data() {
     var genList = function genList(count) {return (
@@ -228,6 +230,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // 点击开始跳转到计时页面
     handleClickStart: function handleClickStart() {
+      this.saveTimeInfo();
       uni.redirectTo({
         url: '../PartRunning/PartRunning' });
 
@@ -242,7 +245,6 @@ __webpack_require__.r(__webpack_exports__);
     countChange: function countChange(val) {
       this.count = parseInt(val) + 1;
       this.saveTimeInfo();
-      console.log(this.count);
     },
     // 运动时间改变
     workTimeChange: function workTimeChange(val) {
@@ -250,7 +252,6 @@ __webpack_require__.r(__webpack_exports__);
       var sec = parseInt(val[1]);
       this.workTime = min * 60 + sec;
       this.saveTimeInfo();
-      console.log(this.workTime);
     },
     // 休息时间改变
     restTimeChange: function restTimeChange(val) {
@@ -258,7 +259,6 @@ __webpack_require__.r(__webpack_exports__);
       var sec = parseInt(val[1]);
       this.restTime = min * 60 + sec;
       this.saveTimeInfo();
-      console.log(this.restTime);
     },
     saveTimeInfo: function saveTimeInfo() {
       var that = this;

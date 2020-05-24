@@ -110,7 +110,9 @@
 			}
 		},
 		onShow() {
-			this.timeInfo = uni.getStorageSync('timeInfo')
+			const timeInfo = uni.getStorageSync('timeInfo')
+			if(!timeInfo) return
+			this.timeInfo = timeInfo
 			this.workTimeSec = this.timeInfo.workTime
 			this.restTimeSec = this.timeInfo.restTime
 			this.timeInfo.totalTime = this.timeInfo.workTime * this.timeInfo.count + this.timeInfo.restTime * (this.timeInfo.count - 1)
@@ -215,6 +217,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		.progress {
 			position: absolute;
 			left: 0;
@@ -229,7 +232,6 @@
 			font-size: 30px;
 			font-family: BebasNeue-Regular;
 			font-weight: lighter;
-			margin-top: 280rpx;
 		}
 		.time {
 			transition: all 0.5s;

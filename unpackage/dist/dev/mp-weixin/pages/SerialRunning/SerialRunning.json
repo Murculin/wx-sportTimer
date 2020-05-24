@@ -1,4 +1,5 @@
 {
+  "disableScroll": true,
   "usingComponents": {
     "circle-button": "/components/CircleButton"
   }
