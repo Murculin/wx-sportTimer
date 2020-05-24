@@ -2,11 +2,10 @@
 	<view
 		class="card"
 		:class="{hover: isHover}"
-		@touchstart="handleCardTouchStart"
 		:style="{'height': `${height}rpx`}"
+		@touchstart="handleCardTouchStart"
 	>
-		<view class="title">{{title}}</view>
-		<view class="time">{{time}}</view>
+		<slot></slot>
 	</view>
 </template>
 
@@ -28,7 +27,9 @@
 		},
 		data() {
 			return {
-				isHover: false
+				isHover: false,
+				value: 0,
+				rangeArr: [0, 1, 2, 3]
 			}
 		},
 		methods: {
@@ -59,17 +60,6 @@
 		&.hover {
 			transform: scale(1.05);
 			background: rgba(212,197,197,0.3);
-		}
-		.title {
-      font-size: 32rpx;
-      color: #eee;
-      font-weight: lighter;
-		}
-		.time {
-			font-size: 80rpx;
-			font-family: BebasNeue-Regular;
-			font-weight: lighter;
-			margin-top: 15rpx;
 		}
 	}
 </style>

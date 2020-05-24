@@ -1,1 +1,1 @@
-<view data-event-opts="{{[['touchstart',[['handleCardTouchStart',['$event']]]]]}}" class="{{['card',(isHover)?'hover':'']}}" style="{{'height:'+(height+'rpx')+';'}}" bindtouchstart="__e"><view class="title">{{title}}</view><view class="time">{{time}}</view></view>
+<view data-event-opts="{{[['touchstart',[['handleCardTouchStart',['$event']]]]]}}" class="{{['card',(isHover)?'hover':'']}}" style="{{'height:'+(height+'rpx')+';'}}" bindtouchstart="__e"><slot></slot></view>

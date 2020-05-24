@@ -1,0 +1,1 @@
+<view class="serial"><view data-event-opts="{{[['tap',[['toggleMode',['$event']]]]]}}" class="top_btn" bindtap="__e">间隔计时</view><view class="record">最好成绩: 00:00</view><view class="time">00:00</view><view class="btn_wrap"><circle-button class="btn_play" vue-id="7fd60f28-1" iconClass="icon-play" bind:__l="__l"></circle-button></view></view>

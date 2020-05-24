@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/Running/Running"
+    "pages/PartRunning/PartRunning",
+    "pages/SerialRunning/SerialRunning"
   ],
   "subPackages": [],
   "window": {

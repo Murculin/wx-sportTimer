@@ -30,6 +30,7 @@
   width: 130rpx;
   height: 130rpx;
   background-color: rgba(212, 197, 197, 0.45);
+  opacity: 1;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -39,6 +40,13 @@
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.circle_button.disable {
+  opacity: 0.15;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
 .circle_button .iconfont {
   font-size: 80rpx;

@@ -1,11 +1,34 @@
 <template>
 	<view class="index page">
+		<view class="top_btn" @click="toggleMode">
+			连续计时
+		</view>
 		<view class="content">
-			<Card class="index_card" title="次数" time="03"></Card>
-			<Card class="index_card" title="运动"></Card>
-			<Card class="index_card" title="休息"></Card>
-			<text class="total_time">共01:20</text>
-			<CircleButton></CircleButton>
+			<MPicker
+				class="index_card"
+				title="次数"
+				:rangeArr="countRange"
+				@change="countChange"
+				:value="countRange[count-1]"
+			></MPicker>
+			<MPicker
+				class="index_card"
+				title="运动"
+				:rangeArr="timeRange"
+				mode="multiSelector"
+				@change="workTimeChange"
+				:value="workTime | formatTime"
+			></MPicker>
+			<MPicker
+				class="index_card"
+				title="休息"
+				:rangeArr="timeRange"
+				mode="multiSelector"
+				@change="restTimeChange"
+				:value="restTime | formatTime"
+			></MPicker>
+			<text class="total_time">共{{totalTime | formatTime}}</text>
+			<CircleButton :disable="disable" @click="handleClickStart"></CircleButton>
 		</view>
 	</view>
 </template>
@@ -13,23 +36,107 @@
 <script>
 	import Card from '../../components/Card/Card.vue'
 	import CircleButton from '../../components/CircleButton.vue'
+	import MPicker from '../../components/MPicker.vue'
 	export default {
 		data() {
+			const genList = count =>
+				[...Array(count)].map((item, index) => index.toString().padStart(2, 0))
+			const timeRange = genList(60)
+			const countRange = genList(100).slice(1)
+			console.log('data')
 			return {
+				countRange, // 控制次数 01-100
+				timeRange: [timeRange, timeRange], // 控制时间 两个00-60的二维数组
+				count: 3,
+				workTime: 30,
+				restTime: 10
+			}
+		},
+		computed:{
+			totalTime() {
+				const totalTime = this.workTime * this.count + this.restTime * (this.count - 1)
+				return totalTime
+			},
+			disable() {
+				return this.workTime && this.restTime ? false : true
+			}
+		},
+		onShow() {
+			const timeInfo = uni.getStorageSync('timeInfo')
+			if(timeInfo) {
+				this.count = timeInfo.count
+				this.workTime = timeInfo.workTime
+				this.workTime = timeInfo.workTime
 			}
 		},
 		methods: {
-
+			// 点击开始跳转到计时页面
+			handleClickStart() {
+				uni.redirectTo({
+				  url: '../PartRunning/PartRunning'
+				})
+			},
+			// 切换计时模式
+			toggleMode() {
+				uni.redirectTo({
+				  url: '../SerialRunning/SerialRunning'
+				})
+			},
+			// 次数改变
+			countChange(val) { 
+				this.count = parseInt(val) + 1
+				this.saveTimeInfo()
+				console.log(this.count)
+			},
+			// 运动时间改变
+			workTimeChange(val) {
+				const min = parseInt(val[0])
+				const sec = parseInt(val[1])
+				this.workTime = min * 60 + sec
+				this.saveTimeInfo()
+				console.log(this.workTime)
+			},
+			// 休息时间改变
+			restTimeChange(val) {
+				const min = parseInt(val[0])
+				const sec = parseInt(val[1])
+				this.restTime = min * 60 + sec
+				this.saveTimeInfo()
+				console.log(this.restTime)
+			},
+			saveTimeInfo() {
+				const that = this
+				uni.setStorageSync('timeInfo', {
+					restTime: that.restTime,
+					workTime: that.workTime,
+					count: that.count,
+					totalTime: that.totalTime
+				})
+			}
 		},
 		components:{
 			Card,
-			CircleButton
+			CircleButton,
+			MPicker
 		}
 	}
 </script>
 
 <style lang="scss">
 	.index {
+		position: relative;
+		.top_btn {
+			position: absolute;
+			width: 200rpx;
+			height: 70rpx;
+			border-radius: 70rpx;
+			top: 50rpx;
+			left: 40rpx;
+			background-color: rgba(0,0,0,0.15);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 		.content {
 			margin-top: 150rpx;
 			padding: 0 40rpx;
@@ -44,6 +151,17 @@
 				margin-bottom: 50rpx;
 				font-size: 32rpx;
 			}
+		}
+		.title {
+		  font-size: 32rpx;
+		  color: #eee;
+		  font-weight: lighter;
+		}
+		.time {
+			font-size: 80rpx;
+			font-family: BebasNeue-Regular;
+			font-weight: lighter;
+			margin-top: 15rpx;
 		}
 	}
 </style>
